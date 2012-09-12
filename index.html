@@ -88,7 +88,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
-    $.getJSON('http://erinandwilly.com/api/read/json?callback=?', function(data) {
+    $.getJSON('http://erinandwilly.com/api/read/json/?num=5&callback=?', function(data) {
       var items = [];
       $.each(data.posts, function(key, val) {
         var photoUrl = val['photo-url-1280'];
@@ -99,6 +99,23 @@
         html: items.join('')
       }).appendTo('div#content');
     });
+    $(window).endlessScroll({
+      pagesToKeep: 5,
+      fireDelay: 10,
+      insertAfter: $('li:last'),
+      content: function(i, p, d) {
+        var start = 5*p;
+        var out;
+        $.getJSON('http://erinandwilly.com/api/read/json/?num=5&start='+start+'&callback=?', function(data) {
+          var items = [];
+          $.each(data.posts, function(key, val) {
+            var photoUrl = val['photo-url-1280'];
+            items.push('<li><img src="'+photoUrl+'"></li>');
+          });
+          out = items.join('');
+        });
+        return out;
+      }});
   </script>
 </body>
 </html>
