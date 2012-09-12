@@ -5,6 +5,7 @@
   <meta name="description" content="this is me"/>
   <title>Willy Hardy</title>
   <link rel="icon" href="./favicon.png" type="image/png"/>
+  <link href="webfonts/ss-social.css" rel="stylesheet" />
   <style type="text/css">
   html, body{
     height: 100%;
@@ -16,7 +17,6 @@
     height: 100%;
     position: fixed;
     z-index: 999999;
-    border: 1em solid #EAEAEA;
   }
   #overlay {
     background: url(images/bg.png) no-repeat center center fixed;
@@ -30,49 +30,72 @@
   #content {
     z-index: 0;
   }
+  ul.photos{
+    margin: 0;
+    padding: 0;
+  }
+  li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: -5px;
+  }
+  ul.photos li img{
+    margin: 0;
+    padding: 0;
+    width:100%;
+  }
+  div#info{
+    font-size: 5em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
+  a#twitter{
+    color: #00ACED;
+  }
+  a#facebook{
+    color: #3B5998;
+  }
+  a#dribbble{
+    color: #ea4c89;
+  }
+  a:hover{
+    text-shadow: 0px 2px 3px #fff, 0px -2px 3px #ccc;
+  }
+
   </style>
 </head>
 <body>
   <div id="bleed">
-    <div id="overlay">&nbsp</div>
+    <div id="overlay">
+      <div id="info">
+        <a href="http://twitter.com/wjhrdy" class="ss-icon" id="twitter">twitter</a>
+        <a href="http://facebook.com/wjhrdy" class="ss-icon" id="facebook">facebook</a>
+        <a href="http://dribbble.com/wjhrdy" class="ss-icon" id="dribbble">dribbble</a>
+      </div>
   </div>
-  <div id="images"></div>
+</div>
+  <div id="content"></div>
   <!-- Wrapping these up into a single CDN based asset might be nice -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
+    setTimeout(function(){
+      $('#info').css('margin-left', -($('#info').innerWidth()/2));
+      $('#info').css('margin-top', -($('#info').innerHeight()/2.5));
+    }, 100);
+
     $.getJSON('http://erinandwilly.com/api/read/json?callback=?', function(data) {
       var items = [];
-
       $.each(data.posts, function(key, val) {
-        console.log(val);
-        // items.push('<img src="'+val.photo-url-1280+'">' + val + '</li>');
+        var photoUrl = val['photo-url-1280'];
+        items.push('<li><img src="'+photoUrl+'"></li>');
       });
-
-    //   $('<ul/>', {
-    //     'class': 'my-new-list',
-    //     html: items.join('')
-    //   }).appendTo('body');
-    // });
-    // $.each($images, function(index,value){
-    //   console.log(index,value);
-      // $('div#images').append(value.content);
-    });
-
-  </script>
-  <script type="text/javascript">
-    $(function() {
-      $('#images').scrollTop(101);
-      var images = $("div#images").clone().find("div");
-      $('#images').endlessScroll({
-        pagesToKeep: 5,
-        inflowPixels: 100,
-        fireDelay: 10,
-        content: function(i, p, d) {
-          console.log(i, p, d)
-          return images.eq(Math.floor(Math.random()*8))[0].outerHTML;
-        }
-      });
+      $('<ul/>', {
+        'class': 'photos',
+        html: items.join('')
+      }).appendTo('div#content');
     });
   </script>
 </body>
