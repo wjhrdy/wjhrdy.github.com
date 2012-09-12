@@ -50,6 +50,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
+    margin-left: -140px;
+    margin-top: -50px
   }
   a#twitter{
     color: #00ACED;
@@ -81,11 +83,6 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
-    setTimeout(function(){
-      $('#info').css('margin-left', -($('#info').innerWidth()/2));
-      $('#info').css('margin-top', -($('#info').innerHeight()/2.5));
-    }, 100);
-
     $.getJSON('http://erinandwilly.com/api/read/json?callback=?', function(data) {
       var items = [];
       $.each(data.posts, function(key, val) {
