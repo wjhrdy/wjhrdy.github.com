@@ -41,8 +41,6 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
-
-  function displayImages(images) {
     $request = 'http://erinandwilly.com/api/read/json';
     $.getJSON($request, function(data) {
       var items = [];
@@ -60,7 +58,7 @@
     // $.each($images, function(index,value){
     //   console.log(index,value);
       // $('div#images').append(value.content);
-    })
+    });
   }
 
   </script>
