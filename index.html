@@ -47,8 +47,8 @@
     $.getJSON($request, function(data) {
       var items = [];
 
-      $.each(data.posts.photo-url-1280, function(key, val) {
-        console.log(key,val);
+      $.each(data, function(key, val) {
+        console.log(val);
         // items.push('<img src="'+val.photo-url-1280+'">' + val + '</li>');
       });
 
@@ -60,7 +60,7 @@
     // $.each($images, function(index,value){
     //   console.log(index,value);
       // $('div#images').append(value.content);
-    })
+    });
   }
 
   </script>
