@@ -41,24 +41,13 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
-  parseRSS("http://erinandwilly.com/rss", displayImages);
-
-  function parseRSS(url, callback) {
-    $.ajax({
-      url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-      dataType: 'json',
-      success: function(data) {
-        callback(data.responseData.feed);
-      }
-    });
-  }
 
   function displayImages(images) {
     $request = 'http://erinandwilly.com/api/read/json';
     $.getJSON($request, function(data) {
       var items = [];
 
-      $.each(data, function(key, val) {
+      $.each(data.posts.photo-url-1280, function(key, val) {
         console.log(key,val);
         // items.push('<img src="'+val.photo-url-1280+'">' + val + '</li>');
       });
