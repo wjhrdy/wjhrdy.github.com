@@ -44,8 +44,8 @@
     $.getJSON('http://erinandwilly.com/api/read/json?callback=?', function(data) {
       var items = [];
 
-      $.each(data, function(key, val) {
-        console.log(key,val);
+      $.each(data.posts, function(key, val) {
+        console.log(val);
         // items.push('<img src="'+val.photo-url-1280+'">' + val + '</li>');
       });
 
