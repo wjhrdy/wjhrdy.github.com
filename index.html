@@ -8,11 +8,6 @@
   <link rel="icon" href="./favicon.png" type="image/png"/>
   <link href="webfonts/ss-social.css" rel="stylesheet" />
   <style type="text/css">
-  @media only screen and (max-device-width: 480px) {
-    div#info{
-      font-size: 2em;
-    }
-  }
   html, body{
     height: 100%;
     margin: 0;
@@ -52,13 +47,13 @@
     padding: 0;
     width:100%;
   }
-  div#info{
+  #info{
+    width: 40%;
+    max-width: 380px;
     font-size: 5em;
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-left: -190px;
-    margin-top: -44px
   }
   a#twitter{
     color: #00ACED;
@@ -92,8 +87,18 @@
   <div id="content"></div>
   <!-- Wrapping these up into a single CDN based asset might be nice -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/jquery.endless-scroll.js"></script>
   <script type="text/javascript">
+    setTimeout(function(){
+      $(window).bind('resize', function()
+      {
+        var osetW = $("#info").innerWidth();
+        var osetH = $("#info").innerHeight();
+        $("#info").css('font-size', 4.5*(osetW/380)+'em')
+        $("#info").css('margin-left', -osetW/2);
+        $("#info").css('margin-top', -osetH/2 + 10*(osetW/380));
+      }).trigger('resize');
+    },100);
+
     $.getJSON('http://erinandwilly.com/api/read/json/?num=3&callback=?', function(data) {
       var items = [];
       $.each(data.posts, function(key, val) {
