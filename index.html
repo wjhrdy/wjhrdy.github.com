@@ -9,12 +9,14 @@
   <link href="webfonts/ss-social.css" rel="stylesheet" />
   <style type="text/css">
   html, body{
+    height: 100%;
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color:#7f007f;
   }
   #bleed {
     width: 100%;
+    height: 100%;
     position: fixed;
     z-index: 999999;
   }
@@ -25,6 +27,7 @@
     -o-background-size: cover;
     background-size: cover;
     width: 100%;
+    height: 100%;
   }
   #content {
     z-index: 0;
@@ -90,7 +93,7 @@
     $("#info").css('font-size', 0.20*osetW);
     $("#info").css('margin-left', -osetW/2);
     $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
-  },100);
+  },150);
 
   $(window).bind('resize', function()
   {
@@ -101,7 +104,7 @@
     $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
   }).trigger('resize');
 
-  $.getJSON('http://erinandwilly.com/api/read/json/?num=3&callback=?', function(data) {
+  $.getJSON('http://erinandwilly.com/api/read/json/?num=5&callback=?', function(data) {
     var items = [];
     $.each(data.posts, function(key, val) {
       var photoUrl = val['photo-url-1280'];
@@ -116,9 +119,9 @@
   var canLoad = true;
 
   $(window).scroll(function () {
-    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 500 && canLoad) {
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 1000 && canLoad) {
       canLoad = false;
-      $.getJSON('http://erinandwilly.com/api/read/json/?num=3&start='+(3*count)+'&callback=?', function(data) {
+      $.getJSON('http://erinandwilly.com/api/read/json/?num=5&start='+(5*count)+'&callback=?', function(data) {
         var items = [];
         $.each(data.posts, function(key, val) {
           var photoUrl = val['photo-url-1280'];
