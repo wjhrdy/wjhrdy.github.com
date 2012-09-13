@@ -48,6 +48,7 @@
     width:100%;
   }
   #info{
+    display: none;
     width: 33%;
     font-size: 5em;
     position: fixed;
@@ -88,12 +89,13 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
   <script type="text/javascript">
   setTimeout(function(){
+    $("#info").css('display', 'block');
     var osetW = $("#info").innerWidth();
     var osetH = $("#info").innerHeight();
     $("#info").css('font-size', 0.20*osetW);
     $("#info").css('margin-left', -osetW/2);
     $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
-  },150);
+  },200);
 
   $(window).bind('resize', function()
   {
