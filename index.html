@@ -48,7 +48,10 @@
     width:100%;
   }
   #info{
-    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
     width: 33%;
     font-size: 5em;
     position: fixed;
@@ -89,13 +92,13 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
   <script type="text/javascript">
   setTimeout(function(){
-    $("#info").css('display', 'block');
     var osetW = $("#info").innerWidth();
     var osetH = $("#info").innerHeight();
     $("#info").css('font-size', 0.20*osetW);
     $("#info").css('margin-left', -osetW/2);
     $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
-  },200);
+    $("#info").css('opacity', '1');
+  },1000);
 
   $(window).bind('resize', function()
   {
