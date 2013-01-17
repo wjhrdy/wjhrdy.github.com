@@ -129,6 +129,7 @@
 
   var numOnPage = 0;
   var goneThrough = 0;
+
   if (numOnPage < 5){
     $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
       var items = [];
@@ -149,26 +150,29 @@
     });
   }
 
-
-  var count = 0;
   var canLoad = true;
 
   $(window).scroll(function () {
-    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 1000 && canLoad) {
+    if (($(window).scrollTop() >= $(document).height() - $(window).height() - 1000)&&(canLoad)){
       canLoad = false;
-      $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=5&start='+(5*count+goneThrough)+'&callback=?', function(data) {
+      var numLoaded = 0;
+      $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
         var items = [];
         $.each(data.posts, function(key, val) {
-          var photoUrl = val['photo-url-1280'];
-          if (!(photoUrl.split('.').pop() === 'gif')){
-            items.push('<li><img src="'+photoUrl+'"></li>');
+          if (numLoaded < 5){
+            var photoUrl = val['photo-url-1280'];
+            goneThrough += 1;
+            if (!(photoUrl.split('.').pop() === 'gif')) {
+              items.push('<li><img src="'+photoUrl+'"></li>');
+              numLoaded += 1;
+            }
           }
         });
-        count++;
         $('li:last').after(items.join(''));
         canLoad = true;
       });
     }
+
   });
   </script>
 </body>
