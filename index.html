@@ -135,10 +135,8 @@
       $.each(data.posts, function(key, val) {
         if (numOnPage < 5){
           var photoUrl = val['photo-url-1280'];
-          console.log(photoUrl, goneThrough);
           goneThrough += 1;
           if (!(photoUrl.split('.').pop() === 'gif')) {
-            console.log('got here')
             items.push('<li><img src="'+photoUrl+'"></li>');
             numOnPage += 1;
           }
