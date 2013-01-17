@@ -127,11 +127,12 @@
     $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
   }).trigger('resize');
 
-  $.getJSON('http://erinandwilly.com/api/read/json/?num=5&callback=?', function(data) {
+  $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=5&callback=?', function(data) {
     var items = [];
     $.each(data.posts, function(key, val) {
       var photoUrl = val['photo-url-1280'];
-      items.push('<li><img src="'+photoUrl+'"></li>');
+      if !(photoUrl.split('.').pop() === 'gif')
+        items.push('<li><img src="'+photoUrl+'"></li>');
     });
     $('<ul/>', {
       'class': 'photos',
@@ -144,11 +145,12 @@
   $(window).scroll(function () {
     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 1000 && canLoad) {
       canLoad = false;
-      $.getJSON('http://erinandwilly.com/api/read/json/?num=5&start='+(5*count)+'&callback=?', function(data) {
+      $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=5&start='+(5*count)+'&callback=?', function(data) {
         var items = [];
         $.each(data.posts, function(key, val) {
           var photoUrl = val['photo-url-1280'];
-          items.push('<li><img src="'+photoUrl+'"></li>');
+          if !(photoUrl.split('.').pop() === 'gif')
+            items.push('<li><img src="'+photoUrl+'"></li>');
         });
         count++;
         $('li:last').after(items.join(''));
