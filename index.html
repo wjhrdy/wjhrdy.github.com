@@ -137,6 +137,7 @@
         if (numOnPage < 5){
           var photoUrl = val['photo-url-1280'];
           goneThrough += 1;
+          console.log(goneThrough);
           if (!(photoUrl.split('.').pop() === 'gif')) {
             items.push('<li><img src="'+photoUrl+'"></li>');
             numOnPage += 1;
