@@ -115,7 +115,7 @@
   var goneThrough = 0;
 
   if (numOnPage < 5){
-    $.getJSON('http://willyhardy.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
+    $.getJSON('http://k80stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
       var items = [];
       $.each(data.posts, function(key, val) {
         if (numOnPage < 5){
