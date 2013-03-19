@@ -52,11 +52,10 @@
     transition: opacity 1s ease-in-out;
     -moz-transition: opacity 1s ease-in-out;
     -webkit-transition: opacity 1s ease-in-out;
-    width: 33%;
-    font-size: 5em;
+    font-size: 2em;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    bottom: 25px;
+    right: 25px;
   }
   #info a::selection {
   background:#FF99CC;
@@ -70,8 +69,8 @@
   background:#FF99CC;
   color: #FFF;
   }
-  a#twitter{
-    color: #00ACED;
+  a#mail{
+    color: #1b275b;
   }
   a#facebook{
     color: #3B5998;
@@ -85,37 +84,49 @@
   a:hover{
     text-shadow: 0px 2px 3px #fff, 0px -2px 3px #ccc;
   }
+  a, a:link, a:visited {
+  display:block;
+  float:left;
+    text-decoration:none;
+  color:#333;
+
+  -moz-transition:all 0.25s ease-in-out;
+  -webkit-transition:all 0.25s ease-in-out;
+  -o-transition:all 0.25s ease-in-out;
+  -ms-transition:all 0.25s ease-in-out;
+  transition:all 0.25s ease-in-out;
+  margin-right:0.3em;
+}
+
+a.popout:hover {
+  -moz-transform:translate(-9px,-9px);
+  -webkit-transform:translate(-9px,-9px);
+  -o-transform:translate(-9px,-9px);
+  -ms-transform:translate(-9px,-9px);
+  transform:translate(-9px,-9px);
+  text-shadow:1px 1px 0px white, 2px 2px 0px, 3px 3px 0px white,4px 4px 0px, 5px 5px 0px white,6px 6px 0px,7px 7px 0px white,8px 8px 0px;
+  border-bottom:8px transparent;
+  border-right:8px transparent;
+}
 
   </style>
 </head>
 <body>
   <div id="bleed">
     <img id="logo" src="images/KScog.png">
+    <div id="info"><a href="mailto:katiestew2@gmail.com" class="ss-icon popout" id="mail">email</a></div>
   </div>
   <div id="content"></div>
   <!-- Wrapping these up into a single CDN based asset might be nice -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
   <script type="text/javascript">
   setTimeout(function(){
-    var osetW = $("#info").innerWidth();
-    var osetH = $("#info").innerHeight();
-    $("#info").css('font-size', 0.20*osetW);
-    $("#info").css('margin-left', -osetW/2);
-    $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
     $("#content").css('opacity', '1');
   },1000);
   setTimeout(function(){
     $("#info").css('opacity', '1');
   },2000);
-  $(window).bind('resize', function()
-  {
-    var osetW = $("#info").innerWidth();
-    var osetH = $("#info").innerHeight();
-    $("#info").css('font-size', 0.20*osetW);
-    $("#info").css('margin-left', -osetW/2);
-    $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
-  }).trigger('resize');
-
+  
   var numOnPage = 0;
   var goneThrough = 0;
 
