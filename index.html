@@ -20,10 +20,10 @@
     position: fixed;
     z-index: 999999;
   }
-  #overlay {
-    background: url(images/KScog.png) no-repeat center center fixed;
-    left: 100px;
-    top:100px;
+  img#logo {
+    left: 25px;
+    top:25px;
+	position:fixed;
   }
   #content {
     opacity: 0;
@@ -90,8 +90,7 @@
 </head>
 <body>
   <div id="bleed">
-    <div id="overlay">
-    </div>
+    <img id="logo" src="images/KScog.png">
   </div>
   <div id="content"></div>
   <!-- Wrapping these up into a single CDN based asset might be nice -->
