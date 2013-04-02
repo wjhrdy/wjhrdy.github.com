@@ -7,6 +7,7 @@
   <title>Katie Stewart</title>
   <link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA493DAABe/wDt6+QA/wCVAADV/wAOxEEAAAD/AP/dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAARAAEzEAAAATMQEzMxAAATMzETMzEAABMzMXEzFAAAQTMXchGEAABIESdyVoQAAEhlJ3JWhAAASGUnclaEAABIZScHJWhERIZScAclaIiIhlJwByVWZmZlUnAAciVVVVInAAAHciIiJ3AAAAAHd3dwAAD//wAAz/MAAIfhAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAgAEAAIABAACAAQAAwAMAAOAHAAD4HwAA" rel="icon" type="image/x-icon" />
   <link href="webfonts/ss-social.css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Cabin:500' rel='stylesheet' type='text/css'>
   <style type="text/css">
   html, body{
     height: 100%;
@@ -18,12 +19,12 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    z-index: 999999;
+    z-index: 5;
   }
   img#logo {
     left: 25px;
     top:25px;
-	position:fixed;
+    position:fixed;
   }
   #content {
     opacity: 0;
@@ -32,17 +33,35 @@
     -webkit-transition: opacity 1s ease-in-out;
     z-index: 0;
   }
-  ul.photos{
-    margin: 0;
-    padding: 0;
+  .captions {
+    opacity: 0;
+    position:fixed;
+    right:35px;
+    top:0px;
   }
-  li{
+  .captions p{
+    font-family: 'Cabin', sans-serif;
+    font-size: 1.3em;
+    color: #1b275b;
+  }
+  .captions {
+    opacity: 0;
+    position:fixed;
+    right:45px;
+    top:0px;
+  }
+  #photos-wrapper{
     margin: 0;
     padding: 0;
-    list-style: none;
+    width:100%;
+  }
+  .photos{
+    display:block;
+    margin: 0;
+    padding: 0;
     margin-bottom: -5px;
   }
-  ul.photos li img{
+  .photos img{
     margin: 0;
     padding: 0;
     width:100%;
@@ -81,13 +100,10 @@
   a#vimeo{
     color: #0DADD6;
   }
-  a:hover{
-    text-shadow: 0px 2px 3px #fff, 0px -2px 3px #ccc;
-  }
   a, a:link, a:visited {
   display:block;
   float:left;
-    text-decoration:none;
+  text-decoration:none;
   color:#333;
 
   -moz-transition:all 0.25s ease-in-out;
@@ -104,7 +120,17 @@ a.popout:hover {
   -o-transform:translate(-9px,-9px);
   -ms-transform:translate(-9px,-9px);
   transform:translate(-9px,-9px);
-  text-shadow:1px 1px 0px white, 2px 2px 0px, 3px 3px 0px white,4px 4px 0px, 5px 5px 0px white,6px 6px 0px,7px 7px 0px white,8px 8px 0px;
+  text-shadow:
+  1px 1px 0 #3770BC,
+  2px 2px 0 #EA4DFC,
+  3px 3px 0 #8F2A8F,
+  4px 4px 0 #449547,
+  5px 5px 0 #74F72F,
+  6px 6px 0 #FCFB49,
+  7px 7px 0 #F5CD43,
+  8px 8px 0 #EB793A,
+  9px 9px 0 #E83637,
+  10px 10px 0 #D12F30;
   border-bottom:8px transparent;
   border-right:8px transparent;
 }
@@ -126,27 +152,40 @@ a.popout:hover {
   setTimeout(function(){
     $("#info").css('opacity', '1');
   },2000);
-  
+
   var numOnPage = 0;
   var goneThrough = 0;
 
-  if (numOnPage < 5){
+  if (numOnPage < 10){
     $.getJSON('http://k80stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
       var items = [];
+      var captions = [];
       $.each(data.posts, function(key, val) {
-        if (numOnPage < 5){
+        if (numOnPage < 10){
           var photoUrl = val['photo-url-1280'];
+          var photoCap = val['photo-caption'];
           goneThrough += 1;
           if (!(photoUrl.split('.').pop() === 'gif')) {
-            items.push('<li><img src="'+photoUrl+'"></li>');
+            items.push('<div class="photos" id="photo'+goneThrough+'"> <img src="'+photoUrl+'"> </div>');
+            captions.push('<div class="captions" id="caption'+goneThrough+'" data-anchor-target="#photo'+goneThrough+'" data-0="opacity:0;top:0px;" data-bottom-top="opacity:0;" data-115-top-top="opacity:1;top:115px;" data--115-top-top="opacity:1;top:115px;" data--500-top-top="opacity:0;top:200px;">'+photoCap+'</div>');
             numOnPage += 1;
           }
         }
       });
-      $('<ul/>', {
-        'class': 'photos',
+      $('<div/>', {
+        'id': 'photos-wrapper',
         html: items.join('')
       }).appendTo('div#content');
+      $('<div/>', {
+        'id': 'captions-wrapper',
+        html: captions.join('')
+      }).appendTo('div#content');
+
+      window.onload = function() {
+        skrollr.init({
+          forceHeight: false
+        });
+      }
     });
   }
 
@@ -158,24 +197,34 @@ a.popout:hover {
       var numLoaded = 0;
       $.getJSON('http://k80stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
         var items = [];
+        var captions = [];
         $.each(data.posts, function(key, val) {
-          if (numLoaded < 5){
+          if (numLoaded < 10){
             var photoUrl = val['photo-url-1280'];
+            var photoCap = val['photo-caption'];
             goneThrough += 1;
             if (!(photoUrl.split('.').pop() === 'gif')) {
-              items.push('<li><img src="'+photoUrl+'"></li>');
+              items.push('<div class="photos" id="photo'+goneThrough+'"> <img src="'+photoUrl+'"> </div>');
+              captions.push('<div class="captions" id="caption'+goneThrough+'" data-anchor-target="#photo'+goneThrough+'" data-0="opacity:0;top:0px;" data-bottom-top="opacity:0;" data-115-top-top="opacity:1;top:115px;" data--115-top-top="opacity:1;top:115px;" data--500-top-top="opacity:0;top:200px;">'+photoCap+'</div>');
               numLoaded += 1;
             }
           }
         });
-        $('li:last').after(items.join(''));
+        $('.photos:last').after(items.join(''));
+        $('.captions:last').after(items.join(''));
+
+        window.onload = function() {
+          skrollr.init({
+            forceHeight: false
+          });
+        }
+
         canLoad = true;
       });
     }
 
   });
   </script>
+  <script type="text/javascript" src="skrollr.min.js"></script>
 </body>
 </html>
-
-
