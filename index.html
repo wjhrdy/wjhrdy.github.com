@@ -164,7 +164,7 @@ a.popout:hover {
   var goneThrough = 0;
 
   if (numOnPage < 10){
-    $.getJSON('http://k80stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
+    $.getJSON('http://k80-stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
       var items = [];
       var captions = [];
       $.each(data.posts, function(key, val) {
@@ -202,7 +202,7 @@ a.popout:hover {
     if (($(window).scrollTop() >= $(document).height() - $(window).height() - 1000)&&(canLoad)){
       canLoad = false;
       var numLoaded = 0;
-      $.getJSON('http://k80stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
+      $.getJSON('http://k80-stew.tumblr.com/api/read/json/?num=30&start='+goneThrough+'&callback=?', function(data) {
         var items = [];
         var captions = [];
         $.each(data.posts, function(key, val) {
