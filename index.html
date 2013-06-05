@@ -20,9 +20,6 @@
       position: fixed;
       z-index: 999999;
     }
-    *:not(html) {
-      -webkit-transform: translate3d(0, 0, 0);
-    }
     #overlay {
       background: url(images/bg.png) no-repeat center center fixed;
       -webkit-background-size: cover;
@@ -38,12 +35,6 @@
       -moz-transition: opacity 1s ease-in-out;
       -webkit-transition: opacity 1s ease-in-out;
       z-index: 0;
-    }
-    @media only screen and (max-device-width: 1024px){
-      #overlay {
-        -webkit-background-size: 1024px 1024px;
-        position: fixed;
-      }
     }
     ul.photos{
       margin: 0;
