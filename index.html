@@ -133,14 +133,7 @@
     $("#info").bind('load', function() {
       $(window).trigger('resize');
     });
-    $('#overlay.fin').bind('click',function() {
-      console.log('here');
-      $('#overlay').removeClass('fin');
-      $('#info').show();
-      $(window).animate({
-        scrollTop: 0
-      }, 800);
-    });
+
     $("ul#photos li:first img").bind("load", fadeInContent());
     $(window).bind('resize', function()
     {
@@ -151,7 +144,7 @@
       $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
     }).trigger('resize');
 
-    var goneThrough = 470;
+    var goneThrough = 0;
     var canLoad = true;
 
     function loadTumblr() {
