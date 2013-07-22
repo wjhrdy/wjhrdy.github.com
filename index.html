@@ -133,8 +133,6 @@
     $("#info").bind('load', function() {
       $(window).trigger('resize');
     });
-
-    $("ul#photos li:first img").bind("load", fadeInContent());
     $(window).bind('resize', function()
     {
       var osetW = $("#info").innerWidth();
@@ -181,6 +179,7 @@
     document.onreadystatechange = function() {
     if (document.readyState === 'complete')
         fadeInInfo();
+        fadeInContent()
     };
 
   </script>
