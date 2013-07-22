@@ -38,7 +38,7 @@
       background-size: cover;
       width: 100%;
       height: 100%;
-      background-attachment: scroll; 
+      background-attachment: scroll;
    }
     #content {
       opacity: 0;
@@ -170,14 +170,18 @@
     $(window).scroll(function () {
       if (($(window).scrollTop() >= $(document).height() - $(window).height() - 1000)&&(canLoad)){
         canLoad = false;
-        loadTumblr(); 
+        loadTumblr();
       }
     });
 
     $( document ).ready(function() {
       loadTumblr();
-      fadeInInfo();
     });
+
+    document.onreadystatechange = function() {
+    if (document.readyState === 'complete')
+        $(document).trigger('fadeInInfo');
+    };
 
   </script>
 </body>
