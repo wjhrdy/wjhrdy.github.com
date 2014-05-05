@@ -154,12 +154,15 @@
         if (data.posts.length === 0) theEnd();
         $.each(data.posts, function(key, val) {
           if ((numLoaded < 5) && (numLoaded <= data.posts.length)){
-            var photoUrl = val['photo-url-1280'];
             goneThrough += 1;
-            if (!(photoUrl.split('.').pop() === 'gif')) {
-              items.push('<li><img src="'+photoUrl+'"></li>');
-              numLoaded += 1;
-            }
+			if (val['photo-url-1280'] != undefined) {
+				var photoUrl = val['photo-url-1280'];
+				
+				if (!(photoUrl.split('.').pop() === 'gif')) {
+				  items.push('<li><img src="'+photoUrl+'"></li>');
+				  numLoaded += 1;
+				}
+			}
           }
         });
         $('ul#photos').append(items.join(''));
