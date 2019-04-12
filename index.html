@@ -68,11 +68,26 @@
       transition: opacity 1s ease-in-out;
       -moz-transition: opacity 1s ease-in-out;
       -webkit-transition: opacity 1s ease-in-out;
-      width: 33%;
       font-size: 5em;
-      position: fixed;
-      top: 50%;
+      position:absolute;
+      top:50%;
       left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #vcenter {
+      position:absolute;
+      top:50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #info li{
+      display: inline;
+    }
+    #info ul{
+      list-style: none;
+      margin:0 !important;
+      padding:0 !important;
+      min-width: 370px;
     }
      #info a::selection {
       background:#FF99CC;
@@ -104,10 +119,10 @@
     a#soundcloud{
       color: #ff8700;
     }
-    #info:hover > a{
+    #info:hover > ul li a{
       opacity: 0.5;
     }
-    #info:hover > a:hover{
+    #info:hover > ul li a:hover{
       opacity: 1.0;
     }
   </style>
@@ -116,10 +131,12 @@
   <div id="bleed">
     <div id="overlay">
       <div id="info">
-	<a href="https://medium.com/@wjhrdy" id="medium"><i class="fab fa-medium-m"></i></a>
-	<a href="http://twitter.com/wjhrdy" class="ss-icon" id="twitter">twitter</a>
-        <a href="http://dribbble.com/wjhrdy" class="ss-icon" id="dribbble">dribbble</a>
-        <a href="http://vimeo.com/wjhrdy" class="ss-icon" id="vimeo">vimeo</a>
+        <ul>
+          <li><a href="https://medium.com/@wjhrdy" id="medium"><i class="fab fa-medium-m" title="medium"></i></a></li>
+          <li><a href="http://twitter.com/wjhrdy" id="twitter"><i class="fab fa-twitter" title="twitter"></i></a></li>
+          <li><a href="http://dribbble.com/wjhrdy" id="dribbble"><i class="fab fa-dribbble" title="dribbble"></i></a></li>
+          <li><a href="http://vimeo.com/wjhrdy" id="vimeo"><i class="fab fa-vimeo-v" title="vimeo"></i></a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -140,18 +157,6 @@
     function fadeInInfo() {
       $("#info").css('opacity', '1');
     }
-    $("#info").bind('load', function() {
-      $(window).trigger('resize');
-    });
-
-    $(window).bind('resize', function()
-    {
-      var osetW = $("#info").innerWidth();
-      var osetH = $("#info").innerHeight();
-      $("#info").css('font-size', 0.15*osetW);
-      $("#info").css('margin-left', -osetW/2);
-      $("#info").css('margin-top', -osetH/2 + 0.15*osetH);
-    }).trigger('resize');
 
     var goneThrough = 0;
     var canLoad = true;
